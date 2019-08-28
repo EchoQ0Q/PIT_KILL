@@ -34,6 +34,6 @@ BFC 是块级格式上下文。他是 web 页面中盒模型布局的 css 渲染
   > - 浮动元素
   > - 定位元素（absolute、fixed）
   > - display 为以下其中之一的值 inline-block，table-cell，table-caption
-  > - overflow 除了 visible 以外的值（hidden，auto，scroll
+  > - overflow 除了 visible 以外的值（hidden，auto，scroll）
 
 ### 6.
