@@ -13,6 +13,7 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 {
+    plugins: [ new MiniCssExtractPlugin() ],
     module: { rules : [{
         test: /\.css$/,
         use: [ MiniCssExtractPlugin.loader ]
@@ -21,13 +22,22 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 ```
 
 ### postcss-loader autoprefixer
-::
-需要浏览器兼容的文件（待补充）
-::
+
 ```javascript
 module.exports = {
     plugins: [ require('autoprefixer') ]
 }
+```
+
+
+> 需要使用`browserslist`来兼容旧版本浏览器，示例如下：
+
+```javascript
+defaults,
+not ie < 8,
+> 1%,
+last 2 versions,
+last 3 iOS versions
 ```
 
 ## 压缩css和js
@@ -45,7 +55,24 @@ webpack插件：optimize-css-assets-webpack-plugin和uglifyjs-webpack-plugin
     }
 ```
 
-::
-如果我们单独在webpack的plugin里面`new OptimizeCssAssetsPlugin()`则不需要压缩js，
+> 如果我们单独在webpack的plugin里面`new OptimizeCssAssetsPlugin()`则不需要压缩js，
 但是如果写在minimizer内，需要对两者都进行压缩。
-::
+
+## 转换es6语法
+webpack插件：`babel-loader` `@babel/core` `@babel/preset-env`
+
+如果需要扩展es7语法`class`,则需要安装相关babel插件。
+```javascript
+{ 
+    test: /\.js$/,
+    exclude: /(node_modules|bower_components)/,
+    use: {
+        loader: 'babel-loader',
+        options: {
+            presets: ['@babel/preset-env'],
+            plugins: ['@babel/plugin-proposal-class-properties']
+        }
+    }
+}
+```
+
